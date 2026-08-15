@@ -11,22 +11,62 @@
             box-sizing: border-box;
         }
 
-        body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            min-height: 100vh;
+        /* ===== LIGHT MODE (Default) ===== */
+        :root {
+            --bg-body: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --bg-nav: rgba(255, 255, 255, 0.85);
+            --bg-nav-mobile: rgba(255, 255, 255, 0.92);
+            --text-primary: #1d1d1f;
+            --text-secondary: #86868b;
+            --text-hover: #1d1d1f;
+            --shadow-nav: 0 0 0 1px rgba(255, 255, 255, 0.5) inset, 0 4px 20px rgba(0, 0, 0, 0.04);
+            --shadow-nav-hover: 0 0 0 1px rgba(255, 255, 255, 0.6) inset, 0 4px 30px rgba(0, 0, 0, 0.08);
+            --border-search: rgba(0, 0, 0, 0.06);
+            --bg-search: rgba(0, 0, 0, 0.03);
+            --bg-search-focus: rgba(255, 255, 255, 0.9);
+            --icon-hover-bg: rgba(0, 0, 0, 0.02);
+            --content-text: #86868b;
+            --toggle-bg: #e9e9ed;
+            --toggle-dot: white;
+            --content-bg: rgba(255, 255, 255, 0.6);
+            --content-border: rgba(255, 255, 255, 0.8);
         }
 
-        /* Desktop Top Navigation - at the VERY TOP */
+        /* ===== DARK MODE ===== */
+        body.dark {
+            --bg-body: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --bg-nav: rgba(30, 30, 46, 0.92);
+            --bg-nav-mobile: rgba(30, 30, 46, 0.95);
+            --text-primary: #f5f5f7;
+            --text-secondary: #86868b;
+            --text-hover: #f5f5f7;
+            --shadow-nav: 0 0 0 1px rgba(255, 255, 255, 0.05) inset, 0 4px 20px rgba(0, 0, 0, 0.3);
+            --shadow-nav-hover: 0 0 0 1px rgba(255, 255, 255, 0.08) inset, 0 4px 30px rgba(0, 0, 0, 0.4);
+            --border-search: rgba(255, 255, 255, 0.08);
+            --bg-search: rgba(255, 255, 255, 0.05);
+            --bg-search-focus: rgba(30, 30, 46, 0.95);
+            --icon-hover-bg: rgba(255, 255, 255, 0.05);
+            --content-text: #a0a0a8;
+            --toggle-bg: #3a3a4a;
+            --toggle-dot: #667eea;
+            --content-bg: rgba(30, 30, 46, 0.6);
+            --content-border: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            background: var(--bg-body);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            min-height: 100vh;
+            transition: background 0.5s ease;
+        }
+
+        /* Desktop Top Navigation */
         .top-nav {
             width: 100%;
-            background: rgba(255, 255, 255, 0.85);
+            background: var(--bg-nav);
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
-            box-shadow: 
-                0 0 0 1px rgba(255, 255, 255, 0.5) inset,
-                0 0 0 1px rgba(0, 0, 0, 0.02),
-                0 4px 20px rgba(0, 0, 0, 0.04);
+            box-shadow: var(--shadow-nav);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -35,15 +75,12 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            transition: all 0.3s ease;
-            gap: 20px;
+            transition: all 0.4s ease;
+            gap: 8px;
         }
 
         .top-nav:hover {
-            box-shadow: 
-                0 0 0 1px rgba(255, 255, 255, 0.6) inset,
-                0 0 0 1px rgba(0, 0, 0, 0.02),
-                0 4px 30px rgba(0, 0, 0, 0.08);
+            box-shadow: var(--shadow-nav-hover);
         }
 
         /* Logo */
@@ -58,21 +95,22 @@
         .logo svg {
             width: 36px;
             height: 36px;
-            fill: #1d1d1f;
+            fill: var(--text-primary);
+            transition: fill 0.3s ease;
         }
 
         .logo span {
             font-size: 20px;
             font-weight: 700;
-            color: #1d1d1f;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
         }
 
-        /* Search Bar - Middle */
+        /* Search Bar */
         .search-container {
             flex: 1;
-            max-width: 500px;
-            margin: 0 20px;
+            max-width: 400px;
+            margin: 0 15px;
             position: relative;
         }
 
@@ -80,21 +118,21 @@
             width: 100%;
             padding: 10px 20px 10px 45px;
             border-radius: 25px;
-            border: 1px solid rgba(0, 0, 0, 0.06);
-            background: rgba(0, 0, 0, 0.03);
+            border: 1px solid var(--border-search);
+            background: var(--bg-search);
             font-size: 14px;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            color: #1d1d1f;
+            color: var(--text-primary);
             transition: all 0.3s ease;
             outline: none;
         }
 
         .search-container input::placeholder {
-            color: #86868b;
+            color: var(--text-secondary);
         }
 
         .search-container input:focus {
-            background: rgba(255, 255, 255, 0.9);
+            background: var(--bg-search-focus);
             border-color: #007aff;
             box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
         }
@@ -106,80 +144,73 @@
             transform: translateY(-50%);
             width: 18px;
             height: 18px;
-            fill: #86868b;
+            fill: var(--text-secondary);
             pointer-events: none;
+            transition: fill 0.3s ease;
         }
 
-        /* Icons on the right */
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            flex-shrink: 0;
-        }
-
-        .icon {
+        /* ===== NAV SECTIONS ===== */
+        .nav-section {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 2px;
+            justify-content: center;
+            padding: 4px 14px;
+            border-radius: 16px;
+            transition: all 0.3s ease;
             cursor: pointer;
-            padding: 6px 14px;
-            border-radius: 14px;
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            position: relative;
-            background: transparent;
             border: none;
-            color: #86868b;
-            z-index: 2;
+            background: transparent;
+            color: var(--text-secondary);
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            min-width: 60px;
+            position: relative;
         }
 
-        .icon:hover {
-            transform: translateY(-2px);
-            color: #1d1d1f;
-            background: rgba(0, 0, 0, 0.02);
+        .nav-section:hover {
+            transform: translateY(-3px);
+            color: var(--text-hover);
+            background: var(--icon-hover-bg);
         }
 
-        .icon:active {
+        .nav-section:active {
             transform: scale(0.94);
         }
 
-        .icon svg {
+        .nav-section svg {
             width: 24px;
             height: 24px;
             fill: currentColor;
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        .icon:hover svg {
+        .nav-section:hover svg {
             transform: scale(1.08);
         }
 
-        .icon span {
+        .nav-section .label {
             font-size: 9px;
             font-weight: 500;
             letter-spacing: 0.3px;
+            margin-top: 2px;
             transition: all 0.3s ease;
             color: inherit;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
-        .icon.active {
-            color: #1d1d1f;
+        .nav-section.active {
+            color: var(--text-primary);
         }
 
-        .icon.active svg {
+        .nav-section.active svg {
             transform: scale(1.05);
         }
 
-        .icon.active span {
-            color: #1d1d1f;
+        .nav-section.active .label {
+            color: var(--text-primary);
             font-weight: 600;
         }
 
-        /* Apple-style active indicator - small dot */
-        .icon.active::after {
+        .nav-section.active::after {
             content: '';
             position: absolute;
             bottom: 2px;
@@ -192,76 +223,257 @@
             box-shadow: 0 0 20px rgba(0, 122, 255, 0.3);
         }
 
-        /* Divider */
-        .nav-divider {
-            width: 1px;
-            height: 35px;
-            background: rgba(0, 0, 0, 0.06);
-            margin: 0 5px;
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
         }
 
-        /* Content below nav */
-        .content {
-            padding: 60px 40px;
-            max-width: 1200px;
-            margin: 0 auto;
+        .profile-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 4px 14px;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            background: transparent;
+            color: var(--text-secondary);
+            min-width: 60px;
+            position: relative;
         }
 
-        .content h1 {
-            font-size: 48px;
+        .profile-wrapper:hover {
+            transform: translateY(-3px);
+            color: var(--text-hover);
+            background: var(--icon-hover-bg);
+        }
+
+        .profile-wrapper .nav-section {
+            padding: 0;
+            min-width: auto;
+        }
+
+        .profile-wrapper .nav-section:hover {
+            transform: none;
+            background: transparent;
+        }
+
+        /* ===== CONTENT AREA ===== */
+        .content-area {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* ===== CONTENT CARDS WITH 15px GAP ON ALL SIDES ===== */
+        .content-card {
+            background: var(--content-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 15px; /* 15px gap on ALL sides - left, right, top, bottom */
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--content-border);
+            transition: all 0.5s ease;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .content-card.active {
+            display: flex;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Inner content wrapper */
+        .content-card .card-inner {
+            padding: 20px 25px;
+            background: var(--content-bg);
+            border-radius: 16px;
+            border: 1px solid var(--content-border);
+        }
+
+        .content-card .icon-big {
+            font-size: 56px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .content-card h2 {
+            font-size: 36px;
             font-weight: 700;
-            color: #1d1d1f;
-            margin-bottom: 20px;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
         }
 
-        .content p {
-            font-size: 18px;
-            color: #86868b;
-            line-height: 1.6;
-            max-width: 600px;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        .content-card p {
+            font-size: 17px;
+            color: var(--content-text);
+            line-height: 1.8;
+            transition: color 0.3s ease;
+            max-width: 500px;
         }
 
-        /* Mobile Bottom Navigation */
+        .content-card .feature-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 12px;
+        }
+
+        .content-card .feature-list li {
+            padding: 8px 0;
+            color: var(--content-text);
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--border-search);
+            transition: color 0.3s ease;
+        }
+
+        .content-card .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .content-card .feature-list li::before {
+            content: '•';
+            color: #007aff;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* ===== DARK MODE TOGGLE INSIDE PROFILE CARD ===== */
+        .profile-dark-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            background: var(--toggle-bg);
+            border-radius: 14px;
+            margin-top: 18px;
+            border: 1px solid var(--border-search);
+            transition: all 0.3s ease;
+        }
+
+        .profile-dark-toggle .toggle-label-text {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile-dark-toggle .toggle-label-text span {
+            font-size: 20px;
+        }
+
+        .profile-dark-toggle .toggle-track {
+            width: 50px;
+            height: 28px;
+            border-radius: 14px;
+            background: var(--text-secondary);
+            position: relative;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .profile-dark-toggle .toggle-track:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-dark-toggle .toggle-dot {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--toggle-dot);
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        body.dark .profile-dark-toggle .toggle-dot {
+            left: 25px;
+            background: white;
+        }
+
+        .profile-dark-toggle .toggle-status {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            min-width: 40px;
+            text-align: right;
+        }
+
+        body.dark .profile-dark-toggle .toggle-status {
+            color: var(--text-primary);
+        }
+
+        /* ===== MOBILE BOTTOM NAV ===== */
         .bottom-nav {
             display: none;
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(255, 255, 255, 0.92);
+            background: var(--bg-nav-mobile);
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
-            padding: 6px 10px 12px;
+            border-top: 1px solid var(--border-search);
+            padding: 6px 8px 12px;
             justify-content: space-around;
             align-items: center;
             z-index: 1000;
             box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+            gap: 2px;
         }
 
-        .bottom-nav .icon {
-            flex: 1;
-            padding: 4px 4px;
+        .bottom-nav .nav-section {
+            padding: 3px 8px;
+            min-width: 35px;
             border-radius: 12px;
-            min-width: 40px;
         }
 
-        .bottom-nav .icon svg {
-            width: 22px;
-            height: 22px;
+        .bottom-nav .nav-section svg {
+            width: 20px;
+            height: 20px;
         }
 
-        .bottom-nav .icon span {
-            font-size: 8px;
+        .bottom-nav .nav-section .label {
+            font-size: 7px;
             letter-spacing: 0.2px;
         }
 
-        .bottom-nav .icon.active::after {
-            bottom: -1px;
+        .bottom-nav .nav-section.active::after {
+            bottom: 0px;
             width: 3px;
             height: 3px;
+        }
+
+        .bottom-nav .profile-wrapper {
+            padding: 3px 8px;
+            min-width: 35px;
+            gap: 6px;
+        }
+
+        .bottom-nav .profile-wrapper .nav-section {
+            padding: 0;
+            min-width: auto;
         }
 
         /* Show bottom nav on small screens */
@@ -274,16 +486,67 @@
                 display: flex;
             }
 
-            .content {
-                padding: 30px 20px 100px;
+            .content-area {
+                padding: 0 15px;
+                margin: 20px auto 100px;
+                gap: 15px;
             }
 
-            .content h1 {
-                font-size: 32px;
+            .content-card {
+                padding: 10px;
+                border-radius: 18px;
             }
 
-            .content p {
-                font-size: 16px;
+            .content-card .card-inner {
+                padding: 15px 15px;
+            }
+
+            .content-card h2 {
+                font-size: 24px;
+            }
+
+            .content-card p {
+                font-size: 14px;
+            }
+
+            .content-card .icon-big {
+                font-size: 36px;
+            }
+
+            .content-card .feature-list li {
+                font-size: 14px;
+                padding: 6px 0;
+            }
+
+            .profile-dark-toggle {
+                padding: 10px 12px;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .profile-dark-toggle .toggle-label-text {
+                font-size: 13px;
+            }
+
+            .profile-dark-toggle .toggle-track {
+                width: 40px;
+                height: 22px;
+            }
+
+            .profile-dark-toggle .toggle-dot {
+                width: 16px;
+                height: 16px;
+                top: 3px;
+                left: 3px;
+            }
+
+            body.dark .profile-dark-toggle .toggle-dot {
+                left: 21px;
+            }
+
+            .profile-dark-toggle .toggle-status {
+                font-size: 12px;
+                min-width: 32px;
             }
         }
 
@@ -292,7 +555,7 @@
             .top-nav {
                 padding: 0 20px;
                 height: 70px;
-                gap: 10px;
+                gap: 5px;
             }
 
             .logo span {
@@ -304,7 +567,7 @@
             }
 
             .search-container {
-                max-width: 300px;
+                max-width: 250px;
                 margin: 0 10px;
             }
             .search-container input {
@@ -317,35 +580,56 @@
                 left: 13px;
             }
 
-            .icon { padding: 5px 10px; }
-            .icon svg { width: 20px; height: 20px; }
-            .icon span { font-size: 8px; letter-spacing: 0.2px; }
-            .nav-divider { height: 30px; margin: 0 5px; }
-
-            .content {
-                padding: 40px 20px;
+            .nav-section {
+                padding: 3px 10px;
+                min-width: 45px;
+            }
+            .nav-section svg {
+                width: 20px;
+                height: 20px;
+            }
+            .nav-section .label {
+                font-size: 8px;
+                letter-spacing: 0.2px;
             }
 
-            .content h1 {
-                font-size: 36px;
+            .profile-wrapper {
+                padding: 3px 10px;
+                gap: 8px;
+            }
+
+            .content-area {
+                gap: 15px;
+            }
+
+            .content-card .card-inner {
+                padding: 20px 25px;
+            }
+
+            .content-card h2 {
+                font-size: 28px;
             }
         }
 
         @media (max-width: 480px) {
             .bottom-nav {
-                padding: 4px 4px 10px;
+                padding: 4px 4px 8px;
             }
-            .bottom-nav .icon svg {
-                width: 18px;
-                height: 18px;
+            .bottom-nav .nav-section svg {
+                width: 16px;
+                height: 16px;
             }
-            .bottom-nav .icon span {
-                font-size: 7px;
+            .bottom-nav .nav-section .label {
+                font-size: 6px;
                 letter-spacing: 0.1px;
             }
-            .bottom-nav .icon {
-                padding: 3px 3px;
-                min-width: 30px;
+            .bottom-nav .nav-section {
+                padding: 2px 5px;
+                min-width: 28px;
+            }
+            .bottom-nav .profile-wrapper {
+                padding: 2px 5px;
+                min-width: 28px;
             }
         }
     </style>
@@ -353,7 +637,7 @@
 <body>
     <!-- Desktop Top Navigation -->
     <div class="top-nav" id="topNav">
-        <!-- Logo - Left -->
+        <!-- Logo -->
         <div class="logo">
             <svg viewBox="0 0 24 24">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
@@ -361,7 +645,7 @@
             <span>MyApp</span>
         </div>
 
-        <!-- Search Bar - Middle -->
+        <!-- Search Bar -->
         <div class="search-container">
             <svg class="search-icon" viewBox="0 0 24 24">
                 <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
@@ -369,93 +653,210 @@
             <input type="text" placeholder="Search...">
         </div>
 
-        <!-- Icons - Right -->
-        <div class="nav-right">
-            <button class="icon active" data-icon="home">
-                <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-                <span>Home</span>
-            </button>
+        <!-- Home -->
+        <button class="nav-section active" data-icon="home">
+            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            <span class="label">Home</span>
+        </button>
 
-            <button class="icon" data-icon="categories">
-                <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
-                <span>Categories</span>
-            </button>
+        <!-- Categories -->
+        <button class="nav-section" data-icon="categories">
+            <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+            <span class="label">Categories</span>
+        </button>
 
-            <button class="icon" data-icon="add">
-                <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-                <span>Add</span>
-            </button>
+        <!-- Add -->
+        <button class="nav-section" data-icon="add">
+            <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            <span class="label">Add</span>
+        </button>
 
-            <div class="nav-divider"></div>
+        <!-- Wishlist -->
+        <button class="nav-section" data-icon="wishlist">
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            <span class="label">Wishlist</span>
+        </button>
 
-            <button class="icon" data-icon="wishlist">
-                <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                <span>Wishlist</span>
-            </button>
-
-            <button class="icon" data-icon="profile">
+        <!-- Profile -->
+        <div class="profile-wrapper">
+            <button class="nav-section" data-icon="profile">
                 <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-                <span>Profile</span>
+                <span class="label">Profile</span>
             </button>
         </div>
     </div>
 
-    <!-- Content -->
-    <div class="content">
-        <h1>Welcome</h1>
-        <p>This is your navigation bar with logo, search bar, and icons. Resize your browser to under 500px to see the bottom navigation appear.</p>
+    <!-- ===== CONTENT AREA ===== -->
+    <div class="content-area">
+        <!-- Home Content -->
+        <div class="content-card active" id="content-home">
+            <div class="card-inner">
+                <span class="icon-big">🏠</span>
+                <h2>Home</h2>
+                <p>Welcome to your dashboard! Here you can see all your important updates and activities.</p>
+                <ul class="feature-list">
+                    <li>📊 5 new notifications</li>
+                    <li>📅 2 upcoming events</li>
+                    <li>⭐ Welcome back, John!</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Categories Content -->
+        <div class="content-card" id="content-categories">
+            <div class="card-inner">
+                <span class="icon-big">📂</span>
+                <h2>Categories</h2>
+                <p>Browse and manage all your categories. Organize your content efficiently.</p>
+                <ul class="feature-list">
+                    <li>📱 Technology</li>
+                    <li>🎨 Design</li>
+                    <li>📈 Business</li>
+                    <li>🎵 Music</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Add Content -->
+        <div class="content-card" id="content-add">
+            <div class="card-inner">
+                <span class="icon-big">➕</span>
+                <h2>Add New</h2>
+                <p>Create and add new items to your collection. Fill in the details below.</p>
+                <ul class="feature-list">
+                    <li>📝 Add new post</li>
+                    <li>🖼️ Upload image</li>
+                    <li>📎 Attach file</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Wishlist Content -->
+        <div class="content-card" id="content-wishlist">
+            <div class="card-inner">
+                <span class="icon-big">❤️</span>
+                <h2>Wishlist</h2>
+                <p>Your saved items and wishlist. Keep track of what you love.</p>
+                <ul class="feature-list">
+                    <li>📱 iPhone 15 Pro</li>
+                    <li>💻 MacBook Air</li>
+                    <li>🎧 AirPods Pro</li>
+                    <li>⌚ Apple Watch</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Profile Content with Dark Mode Toggle -->
+        <div class="content-card" id="content-profile">
+            <div class="card-inner">
+                <span class="icon-big">👤</span>
+                <h2>Profile</h2>
+                <p>Manage your account settings and personal information.</p>
+                <ul class="feature-list">
+                    <li>👤 John Doe</li>
+                    <li>📧 john@example.com</li>
+                    <li>📱 +1 234 567 890</li>
+                    <li>📍 New York, USA</li>
+                </ul>
+
+                <!-- Dark Mode Toggle Inside Profile Card -->
+                <div class="profile-dark-toggle" onclick="toggleTheme(event)">
+                    <div class="toggle-label-text">
+                        <span>🌓</span> Dark Mode
+                    </div>
+                    <div style="display:flex; align-items:center; gap:12px;">
+                        <span class="toggle-status" id="profileThemeStatus">Light</span>
+                        <div class="toggle-track">
+                            <div class="toggle-dot"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Mobile Bottom Navigation -->
     <div class="bottom-nav" id="bottomNav">
-        <button class="icon active" data-icon="home">
+        <button class="nav-section active" data-icon="home">
             <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-            <span>Home</span>
+            <span class="label">Home</span>
         </button>
 
-        <button class="icon" data-icon="categories">
+        <button class="nav-section" data-icon="categories">
             <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
-            <span>Categories</span>
+            <span class="label">Categories</span>
         </button>
 
-        <button class="icon" data-icon="add">
+        <button class="nav-section" data-icon="add">
             <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-            <span>Add</span>
+            <span class="label">Add</span>
         </button>
 
-        <button class="icon" data-icon="wishlist">
+        <button class="nav-section" data-icon="wishlist">
             <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-            <span>Wishlist</span>
+            <span class="label">Wishlist</span>
         </button>
 
-        <button class="icon" data-icon="profile">
-            <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-            <span>Profile</span>
-        </button>
+        <div class="profile-wrapper">
+            <button class="nav-section" data-icon="profile">
+                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                <span class="label">Profile</span>
+            </button>
+        </div>
     </div>
 
     <script>
-        // Sync both desktop and mobile icons
-        const allIcons = document.querySelectorAll('.icon');
+        // ===== NAVIGATION CLICK =====
+        const allSections = document.querySelectorAll('.nav-section');
+        const contentCards = {
+            home: document.getElementById('content-home'),
+            categories: document.getElementById('content-categories'),
+            add: document.getElementById('content-add'),
+            wishlist: document.getElementById('content-wishlist'),
+            profile: document.getElementById('content-profile')
+        };
 
-        allIcons.forEach(icon => {
-            icon.addEventListener('click', function() {
+        allSections.forEach(section => {
+            section.addEventListener('click', function(e) {
                 const iconName = this.dataset.icon;
+                if (!iconName) return;
                 
-                // Remove active from all icons
-                allIcons.forEach(i => i.classList.remove('active'));
-                
-                // Add active to clicked icon
+                allSections.forEach(s => s.classList.remove('active'));
                 this.classList.add('active');
                 
-                // Sync with other navigation (desktop/mobile)
-                allIcons.forEach(i => {
-                    if (i.dataset.icon === iconName) {
-                        i.classList.add('active');
+                allSections.forEach(s => {
+                    if (s.dataset.icon === iconName) {
+                        s.classList.add('active');
                     }
                 });
+
+                Object.values(contentCards).forEach(card => {
+                    card.classList.remove('active');
+                });
+                
+                if (contentCards[iconName]) {
+                    contentCards[iconName].classList.add('active');
+                }
             });
         });
+
+        // ===== DARK MODE TOGGLE =====
+        let isDark = false;
+
+        function toggleTheme(event) {
+            if (event) event.stopPropagation();
+            
+            isDark = !isDark;
+            document.body.classList.toggle('dark', isDark);
+            
+            const status = document.getElementById('profileThemeStatus');
+            status.textContent = isDark ? 'Dark' : 'Light';
+        }
+
+        // Check system preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            toggleTheme();
+        }
     </script>
 </body>
 </html>
