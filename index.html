@@ -12,68 +12,131 @@
         }
 
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            padding: 20px;
+            min-height: 100vh;
         }
 
-        .container {
-            position: relative;
-            width: 650px;
-        }
-
-        /* Desktop Top Navigation */
+        /* Desktop Top Navigation - at the VERY TOP */
         .top-nav {
             width: 100%;
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border-radius: 30px;
             box-shadow: 
-                0 20px 60px rgba(0, 0, 0, 0.08),
                 0 0 0 1px rgba(255, 255, 255, 0.5) inset,
-                0 0 0 1px rgba(0, 0, 0, 0.02);
+                0 0 0 1px rgba(0, 0, 0, 0.02),
+                0 4px 20px rgba(0, 0, 0, 0.04);
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             align-items: center;
-            padding: 0 15px;
-            height: 85px;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            position: relative;
+            padding: 0 40px;
+            height: 80px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+            gap: 20px;
         }
 
         .top-nav:hover {
             box-shadow: 
-                0 25px 70px rgba(0, 0, 0, 0.12),
-                0 0 0 1px rgba(255, 255, 255, 0.6) inset;
-            transform: translateY(-2px);
+                0 0 0 1px rgba(255, 255, 255, 0.6) inset,
+                0 0 0 1px rgba(0, 0, 0, 0.02),
+                0 4px 30px rgba(0, 0, 0, 0.08);
         }
 
-        /* Apple-style icons */
+        /* Logo */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .logo svg {
+            width: 36px;
+            height: 36px;
+            fill: #1d1d1f;
+        }
+
+        .logo span {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1d1d1f;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* Search Bar - Middle */
+        .search-container {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 20px;
+            position: relative;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 10px 20px 10px 45px;
+            border-radius: 25px;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            background: rgba(0, 0, 0, 0.03);
+            font-size: 14px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #1d1d1f;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .search-container input::placeholder {
+            color: #86868b;
+        }
+
+        .search-container input:focus {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: #007aff;
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+        }
+
+        .search-container .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            fill: #86868b;
+            pointer-events: none;
+        }
+
+        /* Icons on the right */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-shrink: 0;
+        }
+
         .icon {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 3px;
+            gap: 2px;
             cursor: pointer;
-            padding: 8px 12px;
-            border-radius: 16px;
+            padding: 6px 14px;
+            border-radius: 14px;
             transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
             background: transparent;
             border: none;
             color: #86868b;
-            flex: 1;
             z-index: 2;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         .icon:hover {
-            transform: translateY(-4px);
+            transform: translateY(-2px);
             color: #1d1d1f;
             background: rgba(0, 0, 0, 0.02);
         }
@@ -83,8 +146,8 @@
         }
 
         .icon svg {
-            width: 26px;
-            height: 26px;
+            width: 24px;
+            height: 24px;
             fill: currentColor;
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
@@ -119,7 +182,7 @@
         .icon.active::after {
             content: '';
             position: absolute;
-            bottom: -2px;
+            bottom: 2px;
             left: 50%;
             transform: translateX(-50%);
             width: 4px;
@@ -129,7 +192,38 @@
             box-shadow: 0 0 20px rgba(0, 122, 255, 0.3);
         }
 
-        /* Mobile Bottom Navigation - shown when screen < 500px */
+        /* Divider */
+        .nav-divider {
+            width: 1px;
+            height: 35px;
+            background: rgba(0, 0, 0, 0.06);
+            margin: 0 5px;
+        }
+
+        /* Content below nav */
+        .content {
+            padding: 60px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .content h1 {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .content p {
+            font-size: 18px;
+            color: #86868b;
+            line-height: 1.6;
+            max-width: 600px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* Mobile Bottom Navigation */
         .bottom-nav {
             display: none;
             position: fixed;
@@ -140,7 +234,7 @@
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
             border-top: 1px solid rgba(0, 0, 0, 0.05);
-            padding: 8px 10px 12px;
+            padding: 6px 10px 12px;
             justify-content: space-around;
             align-items: center;
             z-index: 1000;
@@ -170,13 +264,8 @@
             height: 3px;
         }
 
-        /* Show bottom nav on small screens, hide top nav */
+        /* Show bottom nav on small screens */
         @media (max-width: 500px) {
-            .container {
-                width: 100%;
-                padding-bottom: 80px;
-            }
-
             .top-nav {
                 display: none;
             }
@@ -184,26 +273,67 @@
             .bottom-nav {
                 display: flex;
             }
+
+            .content {
+                padding: 30px 20px 100px;
+            }
+
+            .content h1 {
+                font-size: 32px;
+            }
+
+            .content p {
+                font-size: 16px;
+            }
         }
 
         /* Tablet responsive */
-        @media (max-width: 700px) and (min-width: 501px) {
-            .container { width: 95%; }
-            
+        @media (max-width: 768px) and (min-width: 501px) {
             .top-nav {
-                padding: 0 8px;
-                height: 72px;
-                border-radius: 24px;
+                padding: 0 20px;
+                height: 70px;
+                gap: 10px;
             }
 
-            .icon { padding: 5px 6px; }
+            .logo span {
+                font-size: 16px;
+            }
+            .logo svg {
+                width: 28px;
+                height: 28px;
+            }
+
+            .search-container {
+                max-width: 300px;
+                margin: 0 10px;
+            }
+            .search-container input {
+                padding: 8px 15px 8px 38px;
+                font-size: 13px;
+            }
+            .search-container .search-icon {
+                width: 16px;
+                height: 16px;
+                left: 13px;
+            }
+
+            .icon { padding: 5px 10px; }
             .icon svg { width: 20px; height: 20px; }
             .icon span { font-size: 8px; letter-spacing: 0.2px; }
+            .nav-divider { height: 30px; margin: 0 5px; }
+
+            .content {
+                padding: 40px 20px;
+            }
+
+            .content h1 {
+                font-size: 36px;
+            }
         }
 
         @media (max-width: 480px) {
             .bottom-nav {
-                padding: 6px 6px 10px;
+                padding: 4px 4px 10px;
             }
             .bottom-nav .icon svg {
                 width: 18px;
@@ -221,9 +351,26 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Desktop Top Navigation -->
-        <div class="top-nav" id="topNav">
+    <!-- Desktop Top Navigation -->
+    <div class="top-nav" id="topNav">
+        <!-- Logo - Left -->
+        <div class="logo">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
+            </svg>
+            <span>MyApp</span>
+        </div>
+
+        <!-- Search Bar - Middle -->
+        <div class="search-container">
+            <svg class="search-icon" viewBox="0 0 24 24">
+                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+            </svg>
+            <input type="text" placeholder="Search...">
+        </div>
+
+        <!-- Icons - Right -->
+        <div class="nav-right">
             <button class="icon active" data-icon="home">
                 <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
                 <span>Home</span>
@@ -239,6 +386,8 @@
                 <span>Add</span>
             </button>
 
+            <div class="nav-divider"></div>
+
             <button class="icon" data-icon="wishlist">
                 <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                 <span>Wishlist</span>
@@ -249,6 +398,12 @@
                 <span>Profile</span>
             </button>
         </div>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <h1>Welcome</h1>
+        <p>This is your navigation bar with logo, search bar, and icons. Resize your browser to under 500px to see the bottom navigation appear.</p>
     </div>
 
     <!-- Mobile Bottom Navigation -->
